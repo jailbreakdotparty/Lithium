@@ -6,16 +6,27 @@
 //
 
 import SwiftUI
+import PartyUI
+
+internal enum SelectableTabs: Int, CaseIterable {
+    case home, tweaks
+}
 
 struct ContentView: View {
+    @State private var selectedTab: SelectableTabs = .home
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView(selection: $selectedTab) {
+            HomeView()
+                .tabItem { Label("Home", systemImage: "house") }
+                .tag(SelectableTabs.home)
+            TweaksView()
+                .tabItem { Label("Tweaks", systemImage: "wrench.and.screwdriver") }
+                .tag(SelectableTabs.tweaks)
         }
-        .padding()
+        .onChange(of: selectedTab) { newValue in
+            Haptic.shared.play(.soft, intensity: 0.6)
+        }
     }
 }
 
