@@ -20,7 +20,7 @@ struct StringPayloadItem: Identifiable, Codable, Equatable {
     }
 }
 
-struct BoolPayloadItem: Identifiable, Codable, Equatable {
+struct BoolPayloadItem: Identifiable, Codable, Equatable, Hashable {
     var id: String { label }
     var icon: String = ""
     var label: String = ""

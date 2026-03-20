@@ -11,8 +11,9 @@ struct TweaksView: View {
     var body: some View {
         NavigationStack {
             List {
-                NavigationLink("Restriction Toggles", destination: FeatureFlagsView())
+                NavigationLink("Restriction Toggles", destination: RestrictionTogglesView())
                 NavigationLink("Lockscreen Footnote", destination: FootnoteView())
+                NavigationLink("App Notifications", destination: AppNotificationsView())
             }
             .navigationTitle("Tweaks")
         }

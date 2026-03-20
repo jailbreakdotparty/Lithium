@@ -7,7 +7,7 @@
 
 import Foundation
 
-func getDictionaryFromProfile(_ fileName: String) -> [String : Any] {
+func getDictFromProfile(fileName: String) -> [String : Any] {
     let sourceFileURL = Bundle.main.url(forResource: fileName, withExtension: "mobileconfig")!
     let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     let destinationURL = documentsURL!.appendingPathComponent(fileName).appendingPathExtension("mobileconfig")
@@ -26,7 +26,7 @@ func getDictionaryFromProfile(_ fileName: String) -> [String : Any] {
     return [:]
 }
 
-func getTextFromProfile(_ fileName: String) -> String {
+func getTextFromProfile(fileName: String) -> String {
     let sourceFileURL = Bundle.main.url(forResource: fileName, withExtension: "mobileconfig")!
     let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     let destinationURL = documentsURL!.appendingPathComponent(fileName).appendingPathExtension("mobileconfig")
@@ -46,4 +46,10 @@ func getTextFromProfile(_ fileName: String) -> String {
         print("[!] failed to get text contents from profile: \(error)")
         return ""
     }
+}
+
+func getPCDictFromProfile(fileName: String) -> [String : Any] {
+    let profileDict = getDictFromProfile(fileName: fileName)
+    let payloadContentArray = profileDict["PayloadContent"] as? [[String : Any]] ?? []
+    return payloadContentArray.first ?? [:]
 }

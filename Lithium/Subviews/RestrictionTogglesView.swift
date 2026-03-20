@@ -1,5 +1,5 @@
 //
-//  FeatureFlagsView.swift
+//  RestrictionTogglesView.swift
 //  Lithium
 //
 //  Created by lunginspector on 3/7/26.
@@ -8,9 +8,9 @@
 import SwiftUI
 import PartyUI
 
-struct FeatureFlagsView: View {
+struct RestrictionTogglesView: View {
     // i'm sorry for having it right here but i also don't really care at the same time. lemin does it this way too so shut up.
-    @State private var featureFlagArray: [ItemRow] = [
+    @State private var restrictionTogglesArray: [ItemRow] = [
         ItemRow(icon: "app", label: "Apps", tweakArray: [
             BoolPayloadItem(icon: "bag", label: "App Store", payloadKeys: ["allowUIAppInstallation"], payloadValue: true),
             BoolPayloadItem(icon: "plus.app", label: "App Installation & Removal", payloadKeys: ["allowAppInstallation", "allowAppRemoval"], payloadValue: true),
@@ -48,7 +48,7 @@ struct FeatureFlagsView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach($featureFlagArray) { $section in
+                ForEach($restrictionTogglesArray) { $section in
                     Section(header: HeaderLabel(text: section.label, icon: section.icon)) {
                         ForEach($section.tweakArray) { $item in
                             PlainToggle(icon: item.icon, label: item.label, infoType: item.infoType, infoTitle: "Warning: Disable \(item.label)", infoMessage: item.alertMessage, isOn: $item.payloadValue)
@@ -60,8 +60,8 @@ struct FeatureFlagsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        let featureFlagData = featureFlagArray.flatMap { $0.tweakArray }
-                        updateProfilePlist(name: ProfileName.restrictionFlags, boolData: featureFlagData)
+                        let restrictionTogglesData = restrictionTogglesArray.flatMap { $0.tweakArray }
+                        updateProfilePlist(name: ProfileName.restrictionFlags, boolData: restrictionTogglesData)
                         showDebugSheet.toggle()
                     }) {
                         Image(systemName: "ant")
@@ -85,14 +85,14 @@ struct FeatureFlagsView: View {
                     List {
                         Section(header: HeaderLabel(text: "Actions", icon: "wrench.and.screwdriver")) {
                             Button(action: {
-                                exportProfile(name: ProfileName.restrictionFlags)
+                                exportProfile(profileName: ProfileName.restrictionFlags)
                             }) {
                                 ButtonLabel(text: "Export Profile", icon: "square.and.arrow.up")
                             }
                             .buttonStyle(TranslucentButtonStyle())
                         }
                         Section(header: HeaderLabel(text: "Profile", icon: "info.circle")) {
-                            Text(getTextFromProfile(ProfileName.restrictionFlags))
+                            Text(getTextFromProfile(fileName: ProfileName.restrictionFlags))
                                 .font(.system(size: 10, design: .monospaced))
                         }
                     }
@@ -110,33 +110,31 @@ struct FeatureFlagsView: View {
                 }
             }
         }
-        .onChange(of: featureFlagArray) { newValue in
-            let featureFlagData = featureFlagArray.flatMap { $0.tweakArray }
-            updateProfilePlist(name: ProfileName.restrictionFlags, boolData: featureFlagData)
+        .onChange(of: restrictionTogglesArray) { newValue in
+            let restrictionTogglesData = restrictionTogglesArray.flatMap { $0.tweakArray }
+            updateProfilePlist(name: ProfileName.restrictionFlags, boolData: restrictionTogglesData)
         }
         .onAppear {
-            bindPlistDictToViewArray()
+            getRestrictionTogglesData()
         }
     }
-    func bindPlistDictToViewArray() {
-        let profileDict = getDictionaryFromProfile(ProfileName.restrictionFlags)
-        let payloadContentDict = profileDict["PayloadContent"] as? [[String : Any]] ?? []
-        
+    func getRestrictionTogglesData() {
+        let restrictionTogglesDict = getPCDictFromProfile(fileName: ProfileName.restrictionFlags)
         // get each ItemRow for the feature flag array
-        for row in featureFlagArray.indices {
+        for row in restrictionTogglesArray.indices {
             // get each BoolPayloadItem for the feature flag array
-            for item in featureFlagArray[row].tweakArray.indices {
+            for item in restrictionTogglesArray[row].tweakArray.indices {
                 // get the first item from tweakKey because all keys inside of the array are gonna match to the same value anyways. this nesting is horrifying, but i don't really care.
-                let tweakKey = featureFlagArray[row].tweakArray[item].payloadKeys.first ?? ""
+                let tweakKey = restrictionTogglesArray[row].tweakArray[item].payloadKeys.first ?? ""
                 // now, return the value for the plist version of the tweak key.
-                let plistValue = payloadContentDict[0][tweakKey] as? Bool ?? false
+                let plistValue = restrictionTogglesDict[tweakKey] as? Bool ?? false
                 // finally, update tweakArray.payloadValue to the plistValue. again this nesting sucks.
-                featureFlagArray[row].tweakArray[item].payloadValue = plistValue
+                restrictionTogglesArray[row].tweakArray[item].payloadValue = plistValue
             }
         }
     }
 }
 
 #Preview {
-    FeatureFlagsView()
+    RestrictionTogglesView()
 }

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Inc//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>PayloadType</key>
+        <string>Configuration</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
+        <key>PayloadIdentifier</key>
+        <string>com.lithium.notifications</string>
+        <key>PayloadUUID</key>
+        <string>8075005d-55f5-4a1f-bf99-fefd65f62d4c</string>
+        <key>PayloadDisplayName</key>
+        <string>Supress App Notifications: Name</string>
+        <key>PayloadOrganization</key>
+        <string>Lithium</string>
+        <key>PayloadDescription</key>
+        <string>Bundle Identifier: Bundle Identifier</string>
+        <key>PayloadContent</key>
+        <array>
+            <dict>
+                <key>PayloadType</key>
+                <string>com.apple.notificationsettings</string>
+                <key>PayloadVersion</key>
+                <integer>1</integer>
+                <key>PayloadIdentifier</key>
+                <string>block-shortcuts-notifications.payload</string>
+                <key>PayloadUUID</key>
+                <string>f9ce9a81-5716-457d-a2a0-fa372b01d132</string>
+                <key>PayloadDisplayName</key>
+                <string>Block App Notifications</string>
+                <key>NotificationSettings</key>
+                <array>
+                    <dict>
+                        <key>BundleIdentifier</key>
+                        <string>com.apple.Bridge</string>
+                        <key>NotificationsEnabled</key>
+                        <false/>
+                    </dict>
+                    <dict>
+                        <key>BundleIdentifier</key>
+                        <string>com.apple.camera</string>
+                        <key>NotificationsEnabled</key>
+                        <true/>
+                    </dict>
+                </array>
+            </dict>
+        </array>
+    </dict>
+</plist>

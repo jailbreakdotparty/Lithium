@@ -18,6 +18,8 @@ final class ProfileServingServer {
     private var profileURL: URL!
     
     func startServingProfile(profileURL: URL) throws {
+        self.listener?.cancel()
+        self.listener = nil
         self.profileURL = profileURL
         listener = try NWListener(using: .tcp, on: port)
         listener?.newConnectionHandler = { connection in
@@ -38,6 +40,9 @@ final class ProfileServingServer {
             response += "Content-Type: application/x-apple-aspen-config\r\n"
             response += "Content-Length: \(profileData.count)\r\n"
             response += "Content-Disposition: attachment; filename=\"profile.mobileconfig\"\r\n"
+            // these two responses block safari from caching it
+            response += "Pragma: no-cache\r\n"
+            response += "Expires: 0\r\n"
             response += "\r\n"
             
             var responseData = Data(response.utf8)
@@ -45,6 +50,8 @@ final class ProfileServingServer {
             
             connection.send(content: responseData, completion: .contentProcessed { _ in
                 connection.cancel()
+                self.listener?.cancel()
+                self.listener = nil
             })
         }
     }

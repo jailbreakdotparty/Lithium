@@ -8,9 +8,9 @@
 import Foundation
 
 // my dumbass idea actually worked, lmfao.
-// i'm only doing it this way because i honestly do not feel like creating one struct that handles these items, the value not being directly inferred loves to just break everything.
+// i'm only doing it this way because i honestly do not feel like creating one struct that handles these items, the value not being directly states just breaks everything.
 func updateProfilePlist(name: String, stringData: [StringPayloadItem] = [], boolData: [BoolPayloadItem] = []) {
-    var profileDict = getDictionaryFromProfile(name)
+    var profileDict = getDictFromProfile(fileName: name)
     var payloadContentDict = profileDict["PayloadContent"] as? [[String : Any]] ?? []
     
     for item in boolData {
@@ -27,6 +27,18 @@ func updateProfilePlist(name: String, stringData: [StringPayloadItem] = [], bool
     let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     
     let destinationURL = documentsURL!.appendingPathComponent(name).appendingPathExtension("mobileconfig")
+    do {
+        let encodedPlist = try PropertyListSerialization.data(fromPropertyList: profileDict, format: .xml, options: 0)
+        try encodedPlist.write(to: destinationURL)
+    } catch {
+        print("[!] failed to write updated contents to documents directory!")
+    }
+}
+
+func writeProfileData(profileName: String, profileDict: [String : Any]) {
+    let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    let destinationURL = documentsURL!.appendingPathComponent(profileName).appendingPathExtension("mobileconfig")
+    
     do {
         let encodedPlist = try PropertyListSerialization.data(fromPropertyList: profileDict, format: .xml, options: 0)
         try encodedPlist.write(to: destinationURL)

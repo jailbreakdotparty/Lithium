@@ -9,9 +9,9 @@ import Foundation
 import PartyUI
 import UIKit
 
-func exportProfile(name: String) {
+func exportProfile(profileName: String) {
     let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    let fileURL = documentsURL!.appendingPathComponent(name).appendingPathExtension("mobileconfig")
+    let fileURL = documentsURL!.appendingPathComponent(profileName).appendingPathExtension("mobileconfig")
     PartyUI.presentShareSheet(with: fileURL)
 }
 
