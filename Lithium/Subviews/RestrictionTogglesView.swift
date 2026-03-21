@@ -58,13 +58,13 @@ struct RestrictionTogglesView: View {
             }
             .navigationTitle("Restriction Toggles")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        let restrictionTogglesData = restrictionTogglesArray.flatMap { $0.tweakArray }
-                        updateProfilePlist(name: ProfileName.restrictionFlags, boolData: restrictionTogglesData)
-                        showDebugSheet.toggle()
-                    }) {
-                        Image(systemName: "ant")
+                if weOnADebugBuild {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            showDebugSheet.toggle()
+                        }) {
+                            Image(systemName: "ant")
+                        }
                     }
                 }
             }
@@ -72,7 +72,7 @@ struct RestrictionTogglesView: View {
                 VStack {
                     Button(action: {
                         Haptic.shared.play(.soft)
-                        installProfile(profileName: ProfileName.restrictionFlags)
+                        installProfile(profileName: ProfileName.restrictionToggles)
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
                     }
@@ -81,57 +81,45 @@ struct RestrictionTogglesView: View {
                 .modifier(OverlayBackground(stickBottomPadding: true))
             }
             .sheet(isPresented: $showDebugSheet) {
-                NavigationStack {
-                    List {
-                        Section(header: HeaderLabel(text: "Actions", icon: "wrench.and.screwdriver")) {
-                            Button(action: {
-                                exportProfile(profileName: ProfileName.restrictionFlags)
-                            }) {
-                                ButtonLabel(text: "Export Profile", icon: "square.and.arrow.up")
-                            }
-                            .buttonStyle(TranslucentButtonStyle())
-                        }
-                        Section(header: HeaderLabel(text: "Profile", icon: "info.circle")) {
-                            Text(getTextFromProfile(fileName: ProfileName.restrictionFlags))
-                                .font(.system(size: 10, design: .monospaced))
-                        }
-                    }
-                    .navigationTitle("Debugging Menu")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button(action: {
-                                showDebugSheet = false
-                            }) {
-                                Image(systemName: "xmark")
-                            }
-                        }
-                    }
-                }
+                ProfileDebugSheet(profileName: ProfileName.restrictionToggles)
             }
         }
         .onChange(of: restrictionTogglesArray) { newValue in
-            let restrictionTogglesData = restrictionTogglesArray.flatMap { $0.tweakArray }
-            updateProfilePlist(name: ProfileName.restrictionFlags, boolData: restrictionTogglesData)
+            updateRestrictionTogglesPlist()
         }
         .onAppear {
-            getRestrictionTogglesData()
+            getRestrictionTogglesArrayFromPlist()
         }
     }
-    func getRestrictionTogglesData() {
-        let restrictionTogglesDict = getPCDictFromProfile(fileName: ProfileName.restrictionFlags)
-        // get each ItemRow for the feature flag array
+    func getRestrictionTogglesArrayFromPlist() {
+        let payloadContentDict = getPCDictFromProfile(fileName: ProfileName.restrictionToggles)
+        
         for row in restrictionTogglesArray.indices {
-            // get each BoolPayloadItem for the feature flag array
             for item in restrictionTogglesArray[row].tweakArray.indices {
-                // get the first item from tweakKey because all keys inside of the array are gonna match to the same value anyways. this nesting is horrifying, but i don't really care.
                 let tweakKey = restrictionTogglesArray[row].tweakArray[item].payloadKeys.first ?? ""
-                // now, return the value for the plist version of the tweak key.
-                let plistValue = restrictionTogglesDict[tweakKey] as? Bool ?? false
-                // finally, update tweakArray.payloadValue to the plistValue. again this nesting sucks.
+                let plistValue = payloadContentDict[tweakKey] as? Bool ?? false
+                
                 restrictionTogglesArray[row].tweakArray[item].payloadValue = plistValue
             }
         }
+    }
+    func updateRestrictionTogglesPlist() {
+        let restrictionTogglesArrayFlat = restrictionTogglesArray.flatMap { $0.tweakArray }
+        
+        var restrictionTogglesDict = getDictFromProfile(fileName: ProfileName.restrictionToggles)
+        var payloadContentArray = restrictionTogglesDict["PayloadContent"] as? [[String : Any]] ?? []
+        var payloadContentDict = payloadContentArray.first ?? [:]
+        
+        for item in restrictionTogglesArrayFlat {
+            for key in item.payloadKeys {
+                payloadContentDict[key] = item.payloadValue
+            }
+        }
+        
+        payloadContentArray[0] = payloadContentDict
+        restrictionTogglesDict["PayloadContent"] = payloadContentArray
+        
+        writeProfileData(profileName: ProfileName.restrictionToggles, profileDict: restrictionTogglesDict)
     }
 }
 

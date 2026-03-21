@@ -71,11 +71,13 @@ struct AppNotificationsView: View {
                         Image(systemName: "plus")
                     }
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        showDebugSheet = true
-                    }) {
-                        Image(systemName: "ant")
+                if weOnADebugBuild {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            showDebugSheet = true
+                        }) {
+                            Image(systemName: "ant")
+                        }
                     }
                 }
             }

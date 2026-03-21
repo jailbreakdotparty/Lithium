@@ -11,6 +11,7 @@ import PartyUI
 struct FootnoteView: View {
     @State private var returnMessage: String = ""
     @State private var assetTag: String = ""
+    @State private var showDebugSheet: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -50,6 +51,7 @@ struct FootnoteView: View {
                                     }
                                 }
                                 .font(.system(size: 9))
+                                .frame(height: 10)
                                 Capsule()
                                     .frame(width: 145, height: 4)
                             }
@@ -65,11 +67,22 @@ struct FootnoteView: View {
                 }
             }
             .navigationTitle("Lockscreen Footnote")
+            .toolbar {
+                if weOnADebugBuild {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button(action: {
+                            showDebugSheet.toggle()
+                        }) {
+                            Image(systemName: "ant")
+                        }
+                    }
+                }
+            }
             .safeAreaInset(edge: .bottom) {
                 VStack {
                     Button(action: {
                         Haptic.shared.play(.soft)
-                        updateProfilePlist(name: ProfileName.footnote, stringData: [StringPayloadItem(payloadKey: "IfLostReturnToMessage", payloadValue: returnMessage), StringPayloadItem(payloadKey: "AssetTagInformation", payloadValue: assetTag)])
+                        updateFootnotePlist()
                         installProfile(profileName: ProfileName.footnote)
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
@@ -78,16 +91,31 @@ struct FootnoteView: View {
                 }
                 .modifier(OverlayBackground(stickBottomPadding: true))
             }
+            .sheet(isPresented: $showDebugSheet) {
+                ProfileDebugSheet(profileName: ProfileName.footnote)
+            }
         }
         .onAppear {
-            getFootnoteData()
+            getFootnoteDataFromPlist()
         }
     }
-    
-    func getFootnoteData() {
+    func getFootnoteDataFromPlist() {
         let footnoteDict = getPCDictFromProfile(fileName: ProfileName.footnote)
         assetTag = footnoteDict["AssetTagInformation"] as? String ?? ""
         returnMessage = footnoteDict["IfLostReturnToMessage"] as? String ?? ""
+    }
+    func updateFootnotePlist() {
+        var footnoteDict = getDictFromProfile(fileName: ProfileName.footnote)
+        var payloadContentArray = footnoteDict["PayloadContent"] as? [[String : Any]] ?? []
+        var payloadContentDict = payloadContentArray.first ?? [:]
+        
+        payloadContentDict["IfLostReturnToMessage"] = returnMessage
+        payloadContentDict["AssetTagInformation"] = assetTag
+        
+        payloadContentArray[0] = payloadContentDict
+        footnoteDict["PayloadContent"] = payloadContentArray
+        
+        writeProfileData(profileName: ProfileName.footnote, profileDict: footnoteDict)
     }
 }
 

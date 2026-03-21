@@ -1,5 +1,5 @@
 //
-//  ViewIdentifiers.swift
+//  AppIdentifiers.swift
 //  Lithium
 //
 //  Created by lunginspector on 3/10/26.
@@ -17,7 +17,7 @@ struct ItemRow: Identifiable, Equatable, Sendable {
 }
 
 enum ProfileName {
-    static var restrictionFlags: String { return "com.apple.applicationaccess" }
+    static var restrictionToggles: String { return "com.apple.applicationaccess" }
     static var footnote: String { return "com.apple.shareddeviceconfiguration" }
     static var appNotifications: String { return "com.apple.notificationsettings" }
 }
