@@ -7,10 +7,10 @@
 
 import Foundation
 
-func getDictFromProfile(fileName: String) -> [String : Any] {
-    let sourceFileURL = Bundle.main.url(forResource: fileName, withExtension: "mobileconfig")!
+func getDictFromProfile(profileName: String) -> [String : Any] {
+    let sourceFileURL = Bundle.main.url(forResource: profileName, withExtension: "mobileconfig")!
     let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    let destinationURL = documentsURL!.appendingPathComponent(fileName).appendingPathExtension("mobileconfig")
+    let destinationURL = documentsURL!.appendingPathComponent(profileName).appendingPathExtension("mobileconfig")
     
     if !FileManager.default.fileExists(atPath: destinationURL.path) {
         do {
@@ -26,10 +26,10 @@ func getDictFromProfile(fileName: String) -> [String : Any] {
     return [:]
 }
 
-func getTextFromProfile(fileName: String) -> String {
-    let sourceFileURL = Bundle.main.url(forResource: fileName, withExtension: "mobileconfig")!
+func getTextFromProfile(profileName: String) -> String {
+    let sourceFileURL = Bundle.main.url(forResource: profileName, withExtension: "mobileconfig")!
     let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    let destinationURL = documentsURL!.appendingPathComponent(fileName).appendingPathExtension("mobileconfig")
+    let destinationURL = documentsURL!.appendingPathComponent(profileName).appendingPathExtension("mobileconfig")
     
     if !FileManager.default.fileExists(atPath: destinationURL.path) {
         do {
@@ -48,8 +48,8 @@ func getTextFromProfile(fileName: String) -> String {
     }
 }
 
-func getPCDictFromProfile(fileName: String) -> [String : Any] {
-    let profileDict = getDictFromProfile(fileName: fileName)
+func getPCDictFromProfile(profileName: String) -> [String : Any] {
+    let profileDict = getDictFromProfile(profileName: profileName)
     let payloadContentArray = profileDict["PayloadContent"] as? [[String : Any]] ?? []
     return payloadContentArray.first ?? [:]
 }

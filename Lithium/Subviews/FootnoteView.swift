@@ -83,7 +83,7 @@ struct FootnoteView: View {
                     Button(action: {
                         Haptic.shared.play(.soft)
                         updateFootnotePlist()
-                        installProfile(profileName: ProfileName.footnote)
+                        installProfile(profileName: ProfileName.sharedDeviceConfiguration)
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
                     }
@@ -92,7 +92,7 @@ struct FootnoteView: View {
                 .modifier(OverlayBackground(stickBottomPadding: true))
             }
             .sheet(isPresented: $showDebugSheet) {
-                ProfileDebugSheet(profileName: ProfileName.footnote)
+                ProfileDebugSheet(profileName: ProfileName.sharedDeviceConfiguration)
             }
         }
         .onAppear {
@@ -100,12 +100,12 @@ struct FootnoteView: View {
         }
     }
     func getFootnoteDataFromPlist() {
-        let footnoteDict = getPCDictFromProfile(fileName: ProfileName.footnote)
+        let footnoteDict = getPCDictFromProfile(profileName: ProfileName.sharedDeviceConfiguration)
         assetTag = footnoteDict["AssetTagInformation"] as? String ?? ""
         returnMessage = footnoteDict["IfLostReturnToMessage"] as? String ?? ""
     }
     func updateFootnotePlist() {
-        var footnoteDict = getDictFromProfile(fileName: ProfileName.footnote)
+        var footnoteDict = getDictFromProfile(profileName: ProfileName.sharedDeviceConfiguration)
         var payloadContentArray = footnoteDict["PayloadContent"] as? [[String : Any]] ?? []
         var payloadContentDict = payloadContentArray.first ?? [:]
         
@@ -115,7 +115,7 @@ struct FootnoteView: View {
         payloadContentArray[0] = payloadContentDict
         footnoteDict["PayloadContent"] = payloadContentArray
         
-        writeProfileData(profileName: ProfileName.footnote, profileDict: footnoteDict)
+        writeProfileData(profileName: ProfileName.sharedDeviceConfiguration, profileDict: footnoteDict)
     }
 }
 

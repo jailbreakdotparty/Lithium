@@ -44,10 +44,28 @@ struct RestrictionTogglesView: View {
         ])
     ]
     @State private var showDebugSheet: Bool = false
+    @State private var enableDelayedOTA: Bool = false
+    @State private var softwareUpdateDelayInt: Int = 0
     
     var body: some View {
         NavigationStack {
             List {
+                Section(header: HeaderLabel(text: "Device Updates", icon: "square.and.arrow.down")) {
+                    PlainToggle(icon: "clock", label: "Delay OTA Updates", infoType: .info, infoTitle: "Delay OTA Updates", infoMessage: "Note that this feature only supports delayed OTAs up to 90 days. Also, you cannot downgrade your device with this feature (e.g. delay from 26.3.1 → 26.2).", isOn: $enableDelayedOTA)
+                    if enableDelayedOTA {
+                        HStack {
+                            LabeledContent("Number of Days") {
+                                TextField("Software Update Delay", value: $softwareUpdateDelayInt, format: .number)
+                                    .keyboardType(.numberPad)
+                                    .frame(maxWidth: .infinity)
+                                    .multilineTextAlignment(.trailing)
+                                    .onChange(of: softwareUpdateDelayInt) { newValue in
+                                        softwareUpdateDelayInt = min(max(newValue, 0), 90)
+                                    }
+                            }
+                        }
+                    }
+                }
                 ForEach($restrictionTogglesArray) { $section in
                     Section(header: HeaderLabel(text: section.label, icon: section.icon)) {
                         ForEach($section.tweakArray) { $item in
@@ -72,7 +90,7 @@ struct RestrictionTogglesView: View {
                 VStack {
                     Button(action: {
                         Haptic.shared.play(.soft)
-                        installProfile(profileName: ProfileName.restrictionToggles)
+                        installProfile(profileName: ProfileName.applicationAccess)
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
                     }
@@ -81,10 +99,19 @@ struct RestrictionTogglesView: View {
                 .modifier(OverlayBackground(stickBottomPadding: true))
             }
             .sheet(isPresented: $showDebugSheet) {
-                ProfileDebugSheet(profileName: ProfileName.restrictionToggles)
+                ProfileDebugSheet(profileName: ProfileName.applicationAccess)
             }
         }
         .onChange(of: restrictionTogglesArray) { newValue in
+            updateRestrictionTogglesPlist()
+        }
+        .onChange(of: enableDelayedOTA) { newValue in
+            if newValue == false {
+                softwareUpdateDelayInt = 0
+            }
+            updateRestrictionTogglesPlist()
+        }
+        .onChange(of: softwareUpdateDelayInt) { newValue in
             updateRestrictionTogglesPlist()
         }
         .onAppear {
@@ -92,7 +119,7 @@ struct RestrictionTogglesView: View {
         }
     }
     func getRestrictionTogglesArrayFromPlist() {
-        let payloadContentDict = getPCDictFromProfile(fileName: ProfileName.restrictionToggles)
+        let payloadContentDict = getPCDictFromProfile(profileName: ProfileName.applicationAccess)
         
         for row in restrictionTogglesArray.indices {
             for item in restrictionTogglesArray[row].tweakArray.indices {
@@ -102,11 +129,14 @@ struct RestrictionTogglesView: View {
                 restrictionTogglesArray[row].tweakArray[item].payloadValue = plistValue
             }
         }
+        
+        softwareUpdateDelayInt = payloadContentDict["enforcedSoftwareUpdateDelay"] as? Int ?? 0
+        enableDelayedOTA = payloadContentDict["forceDelayedSoftwareUpdates"] as? Bool ?? false
     }
     func updateRestrictionTogglesPlist() {
         let restrictionTogglesArrayFlat = restrictionTogglesArray.flatMap { $0.tweakArray }
         
-        var restrictionTogglesDict = getDictFromProfile(fileName: ProfileName.restrictionToggles)
+        var restrictionTogglesDict = getDictFromProfile(profileName: ProfileName.applicationAccess)
         var payloadContentArray = restrictionTogglesDict["PayloadContent"] as? [[String : Any]] ?? []
         var payloadContentDict = payloadContentArray.first ?? [:]
         
@@ -116,10 +146,13 @@ struct RestrictionTogglesView: View {
             }
         }
         
+        payloadContentDict["enforcedSoftwareUpdateDelay"] = softwareUpdateDelayInt
+        payloadContentDict["forceDelayedSoftwareUpdates"] = enableDelayedOTA
+        
         payloadContentArray[0] = payloadContentDict
         restrictionTogglesDict["PayloadContent"] = payloadContentArray
         
-        writeProfileData(profileName: ProfileName.restrictionToggles, profileDict: restrictionTogglesDict)
+        writeProfileData(profileName: ProfileName.applicationAccess, profileDict: restrictionTogglesDict)
     }
 }
 

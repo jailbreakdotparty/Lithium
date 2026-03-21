@@ -29,7 +29,6 @@ final class ProfileServingServer {
         listener?.start(queue: .main)
     }
     private func handle(connection: NWConnection) {
-        // what the hell is the point of doing that???
         connection.receive(minimumIncompleteLength: 1, maximumLength: 65536) { _, _, _, _ in
             guard let profileData = try? Data(contentsOf: self.profileURL) else {
                 connection.cancel()

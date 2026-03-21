@@ -15,6 +15,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		152C308B2F6F1964003E395A /* ProfileTemplates */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ProfileTemplates;
+			sourceTree = "<group>";
+		};
 		15B92BD42F5C970C00B73862 /* Lithium */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Lithium;
@@ -37,6 +42,7 @@
 		15B92BC92F5C970C00B73862 = {
 			isa = PBXGroup;
 			children = (
+				152C308B2F6F1964003E395A /* ProfileTemplates */,
 				15B92BD42F5C970C00B73862 /* Lithium */,
 				15B92BD32F5C970C00B73862 /* Products */,
 			);
@@ -66,6 +72,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				152C308B2F6F1964003E395A /* ProfileTemplates */,
 				15B92BD42F5C970C00B73862 /* Lithium */,
 			);
 			name = Lithium;

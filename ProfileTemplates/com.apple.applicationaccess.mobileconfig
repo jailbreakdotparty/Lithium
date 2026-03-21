@@ -2,31 +2,9 @@
 <!DOCTYPE plist PUBLIC “-//Apple//DTD PLIST 1.0//EN” “http://www.apple.com/DTDs/PropertyList-1.0.dtd”>
 <plist version=”1.0”>
     <dict>
-        <key>PayloadDisplayName</key>
-        <string>Restriction Toggles</string>
-        <key>PayloadOrganization</key>
-        <string>Lithium</string>
-        <key>PayloadDescription</key>
-        <string>An array of toggles that use the "Restrictions" payload to gain more control over your device. Click into the "Restrictions" menu to get a general idea of what you've just disabled. Also, some toggles, if disabled, will prompt you with warnings when moving to the next screen. Please listen to them!</string>
-        <key>PayloadIdentifier</key>
-        <string>com.lithium.restrictionToggles</string>
-        <key>PayloadType</key>
-        <string>Configuration</string>
-        <key>PayloadUUID</key>
-        <string>6020206c-12c2-4ada-987a-dd4c560ca73a</string>
-        <key>PayloadVersion</key>
-        <integer>1</integer>
         <key>PayloadContent</key>
         <array>
             <dict>
-                <key>PayloadIdentifier</key>
-                <string>com.lithium.featureflags</string>
-                <key>PayloadType</key>
-                <string>com.apple.applicationaccess</string>
-                <key>PayloadUUID</key>
-                <string>53bec1be-ffec-4f88-acbd-b02aee8f04a9</string>
-                <key>PayloadVersion</key>
-                <integer>1</integer>
                 <key>allowUIAppInstallation</key>
                 <true/>
                 <key>allowAppInstallation</key>
@@ -77,7 +55,37 @@
                 <true/>
                 <key>allowWritingTools</key>
                 <true/>
+                <!-- this looks interesting... -->
+                <key>blockedAppBundleIDs</key>
+                <array>
+                </array>
+                <key>enforcedSoftwareUpdateDelay</key>
+                <integer>0</integer>
+                <key>forceDelayedSoftwareUpdates</key>
+                <false/>
+                <key>PayloadIdentifier</key>
+                <string>com.lithium.featureflags</string>
+                <key>PayloadType</key>
+                <string>com.apple.applicationaccess</string>
+                <key>PayloadUUID</key>
+                <string>53bec1be-ffec-4f88-acbd-b02aee8f04a9</string>
+                <key>PayloadVersion</key>
+                <integer>1</integer>
             </dict>
         </array>
+        <key>PayloadDisplayName</key>
+        <string>Restriction Toggles</string>
+        <key>PayloadOrganization</key>
+        <string>Lithium</string>
+        <key>PayloadDescription</key>
+        <string>An array of toggles that use the "Restrictions" payload to gain more control over your device. The "Restrictions" tab that you see below is a bit unreliable as to what's actually enabled, so take whatever that says with a grain of salt. Also, some toggles, if disabled, will prompt you with warnings when moving to the next screen. Please listen to them!</string>
+        <key>PayloadIdentifier</key>
+        <string>com.lithium.restrictionToggles</string>
+        <key>PayloadType</key>
+        <string>Configuration</string>
+        <key>PayloadUUID</key>
+        <string>6020206c-12c2-4ada-987a-dd4c560ca73a</string>
+        <key>PayloadVersion</key>
+        <integer>1</integer>
     </dict>
 </plist>

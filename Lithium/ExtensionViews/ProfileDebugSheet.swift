@@ -24,11 +24,11 @@ struct ProfileDebugSheet: View {
                     .buttonStyle(TranslucentButtonStyle())
                 }
                 Section(header: HeaderLabel(text: "Profile", icon: "info.circle")) {
-                    Text(getTextFromProfile(fileName: profileName))
+                    Text(getTextFromProfile(profileName: profileName))
                         .font(.system(size: 10, design: .monospaced))
                         .contextMenu {
                             Button(action: {
-                                UIPasteboard.general.string = getTextFromProfile(fileName: profileName)
+                                UIPasteboard.general.string = getTextFromProfile(profileName: profileName)
                             }) {
                                 ButtonLabel(text: "Copy Profile", icon: "doc.on.doc")
                             }

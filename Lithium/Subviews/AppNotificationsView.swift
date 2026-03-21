@@ -8,6 +8,15 @@
 import SwiftUI
 import PartyUI
 
+struct ItemRow: Identifiable, Equatable, Sendable {
+    var id: String { label }
+    var icon: String
+    var label: String
+    var minSupportedVersion: Double = 0.0
+    var maxSupportedVersion: Double = 99.9
+    var tweakArray: [BoolPayloadItem]
+}
+
 struct AppNotificationsView: View {
     @State private var appNotificationsArray: [BoolPayloadItem] = []
     @State private var showDebugSheet: Bool = false
@@ -46,7 +55,7 @@ struct AppNotificationsView: View {
                 VStack {
                     Button(action: {
                         Haptic.shared.play(.soft)
-                        installProfile(profileName: ProfileName.appNotifications)
+                        installProfile(profileName: ProfileName.notificationSettings)
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
                     }
@@ -82,7 +91,7 @@ struct AppNotificationsView: View {
                 }
             }
             .sheet(isPresented: $showDebugSheet) {
-                ProfileDebugSheet(profileName: ProfileName.appNotifications)
+                ProfileDebugSheet(profileName: ProfileName.notificationSettings)
             }
         }
         .onAppear {
@@ -104,7 +113,7 @@ struct AppNotificationsView: View {
      i hate this entire structure so much, but i guess it makes sense?
     */
     func getAppNotificationsArrayFromPlist() {
-        let plistDict = getDictFromProfile(fileName: ProfileName.appNotifications)
+        let plistDict = getDictFromProfile(profileName: ProfileName.notificationSettings)
         let payloadContentArray = plistDict["PayloadContent"] as? [[String : Any]] ?? []
         let payloadContentDict = payloadContentArray.first ?? [:]
         let notificationSettingsArray = payloadContentDict["NotificationSettings"] as? [[String : Any]] ?? []
@@ -116,7 +125,7 @@ struct AppNotificationsView: View {
         }
     }
     func updateAppNotificationsPlist() {
-        var plistDict = getDictFromProfile(fileName: ProfileName.appNotifications)
+        var plistDict = getDictFromProfile(profileName: ProfileName.notificationSettings)
         // the outer brackets represent an array, [String : Any] represents a dictionary
         var payloadContentArray = plistDict["PayloadContent"] as? [[String : Any]] ?? []
         // return the first item from the array because there's only ever supposed to be one item inside at a time
@@ -138,7 +147,7 @@ struct AppNotificationsView: View {
         plistDict["PayloadContent"] = payloadContentArray
         
         // write the whole thing back into the internal plist
-        writeProfileData(profileName: ProfileName.appNotifications, profileDict: plistDict)
+        writeProfileData(profileName: ProfileName.notificationSettings, profileDict: plistDict)
     }
 }
 
