@@ -29,6 +29,9 @@ struct HomeView: View {
                     }
                     .buttonStyle(TranslucentButtonStyle())
                 }
+                Section(header: HeaderLabel(text: "Credits", icon: "person")) {
+                    LinkCreditCell(image: Image("lunginspector"), name: "lunginspector", description: "Primary Developer", url: "https://github.com/lunginspector")
+                }
             }
             .navigationTitle("Lithium")
             .sheet(isPresented: $showProfileExportingSheet) {

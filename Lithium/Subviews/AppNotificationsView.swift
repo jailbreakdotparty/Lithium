@@ -126,27 +126,19 @@ struct AppNotificationsView: View {
     }
     func updateAppNotificationsPlist() {
         var plistDict = getDictFromProfile(profileName: ProfileName.notificationSettings)
-        // the outer brackets represent an array, [String : Any] represents a dictionary
         var payloadContentArray = plistDict["PayloadContent"] as? [[String : Any]] ?? []
-        // return the first item from the array because there's only ever supposed to be one item inside at a time
         var payloadContentDict = payloadContentArray.first ?? [:]
-        // return notificationsettings as an array. note that [String : Any] also represents a dictionary.
         var newNotifSettArray: [[String: Any]] = []
         
-        // iterate through appNotificationsArray so that we can update the plist with the new items inside.
         for application in appNotificationsArray {
             let appName = application.payloadKeys.first ?? ""
             newNotifSettArray.append(["BundleIdentifier" : appName, "NotificationsEnabled" : application.payloadValue])
         }
         
-        // send notificationSettingsArray back into payloadContentDict
         payloadContentDict["NotificationSettings"] = newNotifSettArray
-        // send payloadContentDict back into payloadContentArray
         payloadContentArray[0] = payloadContentDict
-        // send payloadContentArray back into plistDict
         plistDict["PayloadContent"] = payloadContentArray
         
-        // write the whole thing back into the internal plist
         writeProfileData(profileName: ProfileName.notificationSettings, profileDict: plistDict)
     }
 }

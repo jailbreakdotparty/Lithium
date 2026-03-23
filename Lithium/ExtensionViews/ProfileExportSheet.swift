@@ -11,7 +11,7 @@ import PartyUI
 struct ProfileExportSheet: View {
     @Environment(\.dismiss) var dismiss
     @State private var profileArray: [ExportableProfileItem] = [
-        ExportableProfileItem(icon: "flag", label: "Restriction Toggles", profileName: ProfileName.applicationAccess),
+        ExportableProfileItem(icon: "flag", label: "Restriction Toggles/Blocked Applications", profileName: ProfileName.applicationAccess),
         ExportableProfileItem(icon: "character.cursor.ibeam", label: "Lockscreen Footnote", profileName: ProfileName.sharedDeviceConfiguration),
         ExportableProfileItem(icon: "bell", label: "App Notifications", profileName: ProfileName.notificationSettings)
     ]
@@ -24,8 +24,9 @@ struct ProfileExportSheet: View {
                         Button(action: {
                             exportProfile(profileName: item.profileName)
                         }) {
-                            NavigationLabel(text: item.label, icon: item.icon)
+                            NavigationLabel(text: item.label)
                         }
+                        .buttonStyle(.plain)
                     }
                 }
             }
