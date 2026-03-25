@@ -55,7 +55,6 @@
                 <true/>
                 <key>allowWritingTools</key>
                 <true/>
-                <!-- this looks interesting... -->
                 <key>blockedAppBundleIDs</key>
                 <array>
                 </array>

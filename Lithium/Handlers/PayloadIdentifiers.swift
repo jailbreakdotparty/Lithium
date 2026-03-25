@@ -12,6 +12,7 @@ enum ProfileName {
     static var applicationAccess: String { return "com.apple.applicationaccess" }
     static var sharedDeviceConfiguration: String { return "com.apple.shareddeviceconfiguration" }
     static var notificationSettings: String { return "com.apple.notificationsettings" }
+    static var webclip: String { return "com.apple.webClip.managed" }
 }
 
 struct StringPayloadItem: Identifiable, Codable, Equatable {

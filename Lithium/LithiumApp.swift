@@ -28,7 +28,7 @@ struct LithiumApp: App {
             ContentView()
                 .onAppear {
                     if weOnADebugBuild {
-                        print("[!] debugging time!!!")
+                        print("[!] it's debugging time!!!")
                     }
                 }
         }

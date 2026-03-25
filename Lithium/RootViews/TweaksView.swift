@@ -13,11 +13,11 @@ struct TweaksView: View {
         NavigationStack {
             List {
                 Section {
-                    HStack(spacing: 12) {
+                    HStack(spacing: 14) {
                         Image(systemName: "info.circle")
                             .imageScale(.large)
                         VStack(alignment: .leading) {
-                            Text("Many of these tweaks are grouped by payload. This means that tweaks in the same section will all apply at once.")
+                            Text("Any of these tweaks grouped by payload will apply all at once.")
                                 .font(.callout)
                         }
                     }
@@ -30,6 +30,7 @@ struct TweaksView: View {
                 Section(header: HeaderLabel(text: "Other Tweaks", icon: "wrench.and.screwdriver")) {
                     NavigationLink("Lockscreen Footnote", destination: FootnoteView())
                     NavigationLink("App Notifications", destination: AppNotificationsView())
+                    NavigationLink("Webclip Generator", destination: WebclipView())
                 }
             }
             .navigationTitle("Tweaks")
