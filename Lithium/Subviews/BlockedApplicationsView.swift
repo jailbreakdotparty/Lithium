@@ -21,12 +21,21 @@ struct BlockedApplicationsView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(blockedApplicationsArray) { app in
-                    LabeledContent(app.bundleID) {
-                        Button(role: .destructive, action: {
-                            blockedApplicationsArray.removeAll { $0.id == app.id }
-                        }) {
-                            Image(systemName: "xmark")
+                if blockedApplicationsArray.isEmpty {
+                    CompactAlert(label: "No Applications Added!", icon: "questionmark.app.dashed", text: "Click on the plus icon to add an app by bundle identifer. This will hide the app from your device completely for the apps you choose.")
+                } else {
+                    CompactAlert(icon: "info.circle", text: "If added, the app will not show up anywhere on the device.")
+                }
+                if !blockedApplicationsArray.isEmpty {
+                    Section(header: HeaderLabel(text: "Selected Apps", icon: "checklist")) {
+                        ForEach(blockedApplicationsArray) { app in
+                            LabeledContent(app.bundleID) {
+                                Button(role: .destructive, action: {
+                                    blockedApplicationsArray.removeAll { $0.id == app.id }
+                                }) {
+                                    Image(systemName: "xmark")
+                                }
+                            }
                         }
                     }
                 }
@@ -60,6 +69,7 @@ struct BlockedApplicationsView: View {
                     }) {
                         Image(systemName: "plus")
                     }
+                    .modifier(SolariumButtonTint())
                 }
                 if weOnADebugBuild {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -68,6 +78,7 @@ struct BlockedApplicationsView: View {
                         }) {
                             Image(systemName: "ant")
                         }
+                        .modifier(SolariumButtonTint())
                     }
                 }
             }

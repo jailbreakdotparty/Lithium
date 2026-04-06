@@ -75,6 +75,7 @@ struct FootnoteView: View {
                         }) {
                             Image(systemName: "ant")
                         }
+                        .modifier(SolariumButtonTint())
                     }
                 }
             }

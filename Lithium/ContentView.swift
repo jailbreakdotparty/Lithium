@@ -13,6 +13,7 @@ internal enum SelectableTabs: Int, CaseIterable {
 }
 
 struct ContentView: View {
+    @EnvironmentObject var theme: AppTheme
     @State private var selectedTab: SelectableTabs = .home
     
     var body: some View {
@@ -32,4 +33,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environmentObject(AppTheme())
 }

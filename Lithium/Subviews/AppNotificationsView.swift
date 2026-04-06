@@ -24,28 +24,39 @@ struct AppNotificationsView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(appNotificationsArray) { app in
-                    // i hate swift SO MUCH. this sucks. i had to do this because binding the whole array would cause the app to crash if there was only one item left in the array and it was deleted.
-                    PlainToggle(label: app.label, isOn: Binding(
-                            get: {
-                                // $0.id - the id of the item it's searching through
-                                // passing false if nothing is found is the main thing fixes the crash, as there's now some kind of value while it's transitioning into an empty array or something.
-                                appNotificationsArray.first(where: { $0.id == app.id })?.payloadValue ?? false
-                            },
-                            set: { newValue in
-                                // match the index where the searched id to the app id
-                                if let index = appNotificationsArray.firstIndex(where: { $0.id == app.id }) {
-                                    // update the index's payloadValue with a new item
-                                    appNotificationsArray[index].payloadValue = newValue
+                Section {
+                    if appNotificationsArray.isEmpty {
+                        CompactAlert(label: "No Applications Added!", icon: "questionmark.app.dashed", text: "Click on the plus icon to add an app by bundle identifer. This will disable all notifications for the apps you choose.")
+                    } else {
+                        CompactAlert(icon: "info.circle", text: "If enabled, the app will no longer be able to send any notifications, including critical and system alerts.")
+                    }
+                }
+                if !appNotificationsArray.isEmpty {
+                    Section(header: HeaderLabel(text: "Selected Applications", icon: "checklist")) {
+                        ForEach(appNotificationsArray) { app in
+                            // i hate swift SO MUCH. this sucks. i had to do this because binding the whole array would cause the app to crash if there was only one item left in the array and it was deleted.
+                            PlainToggle(label: app.label, isOn: Binding(
+                                get: {
+                                    // $0.id - the id of the item it's searching through
+                                    // passing false if nothing is found is the main thing fixes the crash, as there's now some kind of value while it's transitioning into an empty array or something.
+                                    appNotificationsArray.first(where: { $0.id == app.id })?.payloadValue ?? false
+                                },
+                                set: { newValue in
+                                    // match the index where the searched id to the app id
+                                    if let index = appNotificationsArray.firstIndex(where: { $0.id == app.id }) {
+                                        // update the index's payloadValue with a new item
+                                        appNotificationsArray[index].payloadValue = newValue
+                                    }
+                                }
+                            )
+                            )
+                            .swipeActions {
+                                Button(role: .destructive, action: {
+                                    appNotificationsArray.removeAll { $0.id == app.id }
+                                }) {
+                                    Image(systemName: "trash")
                                 }
                             }
-                        )
-                    )
-                    .swipeActions {
-                        Button(role: .destructive, action: {
-                            appNotificationsArray.removeAll { $0.id == app.id }
-                        }) {
-                            Image(systemName: "trash")
                         }
                     }
                 }
@@ -73,12 +84,13 @@ struct AppNotificationsView: View {
                             } else if appNotificationsArray.contains(where: { $0.label == appBID }) {
                                 Alertinator.shared.alert(title: "Error!", body: "This bundle id has already been added.")
                             } else {
-                                appNotificationsArray.append(BoolPayloadItem(label: appBID, payloadKeys: [appBID], payloadValue: false))
+                                appNotificationsArray.append(BoolPayloadItem(label: appBID, payloadKeys: [appBID], payloadValue: true))
                             }
                         }
                     }) {
                         Image(systemName: "plus")
                     }
+                    .modifier(SolariumButtonTint())
                 }
                 if weOnADebugBuild {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -87,6 +99,7 @@ struct AppNotificationsView: View {
                         }) {
                             Image(systemName: "ant")
                         }
+                        .modifier(SolariumButtonTint())
                     }
                 }
             }

@@ -32,6 +32,7 @@ struct ProfileDebugSheet: View {
                             }) {
                                 ButtonLabel(text: "Copy Profile", icon: "doc.on.doc")
                             }
+                            .modifier(SolariumButtonTint())
                         }
                 }
             }
@@ -44,6 +45,7 @@ struct ProfileDebugSheet: View {
                     }) {
                         Image(systemName: "xmark")
                     }
+                    .modifier(SolariumButtonTint())
                 }
             }
         }

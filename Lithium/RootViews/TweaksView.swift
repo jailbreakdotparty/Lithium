@@ -13,23 +13,16 @@ struct TweaksView: View {
         NavigationStack {
             List {
                 Section {
-                    HStack(spacing: 14) {
-                        Image(systemName: "info.circle")
-                            .imageScale(.large)
-                        VStack(alignment: .leading) {
-                            Text("Any of these tweaks grouped by payload will apply all at once.")
-                                .font(.callout)
-                        }
-                    }
+                    CompactAlert(icon: "info.circle", text: "Any of the tweaks grouped by payload will apply all at once.")
                 }
-                .listRowBackground(Color.blue.opacity(0.2))
+                .listRowBackground(Color.accentColor.opacity(0.2))
                 Section(header: HeaderLabel(text: "Restrictions", icon: "checklist")) {
                     NavigationLink("Restriction Toggles", destination: RestrictionTogglesView())
                     NavigationLink("Blocked Applications", destination: BlockedApplicationsView())
                 }
                 Section(header: HeaderLabel(text: "Other Tweaks", icon: "wrench.and.screwdriver")) {
                     NavigationLink("Lockscreen Footnote", destination: FootnoteView())
-                    NavigationLink("App Notifications", destination: AppNotificationsView())
+                    NavigationLink("Disable App Notifications", destination: AppNotificationsView())
                     NavigationLink("Webclip Generator", destination: WebclipView())
                 }
             }

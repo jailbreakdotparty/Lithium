@@ -67,6 +67,7 @@ struct WebclipView: View {
                         }) {
                             Image(systemName: "ant")
                         }
+                        .modifier(SolariumButtonTint())
                     }
                 }
             }

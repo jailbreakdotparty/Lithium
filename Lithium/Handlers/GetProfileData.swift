@@ -16,7 +16,7 @@ func getDictFromProfile(profileName: String) -> [String : Any] {
         do {
             try FileManager.default.copyItem(at: sourceFileURL, to: destinationURL)
         } catch {
-            print("[!] failed to copy bundle profile template file to documents directory")
+            print("[!] failed to copy bundle profile template file to documents directory: \(error)")
         }
     }
     
@@ -34,7 +34,9 @@ func getTextFromProfile(profileName: String) -> String {
     if !FileManager.default.fileExists(atPath: destinationURL.path) {
         do {
             try FileManager.default.copyItem(at: sourceFileURL, to: destinationURL)
-        } catch { }
+        } catch {
+            print("[!] failed to copy bundle profile template file to documents directory: \(error)")
+        }
     }
     
     do {

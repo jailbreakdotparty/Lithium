@@ -39,6 +39,7 @@ struct ProfileExportSheet: View {
                     }) {
                         Image(systemName: "xmark")
                     }
+                    .modifier(SolariumButtonTint())
                 }
             }
         }

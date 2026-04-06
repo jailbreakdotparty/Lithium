@@ -83,6 +83,7 @@ struct RestrictionTogglesView: View {
                         }) {
                             Image(systemName: "ant")
                         }
+                        .modifier(SolariumButtonTint())
                     }
                 }
             }

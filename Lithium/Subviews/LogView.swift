@@ -35,15 +35,16 @@ struct LogView: View {
                         dup2(pipe.fileHandleForWriting.fileDescriptor, STDOUT_FILENO)
                     }
                     .contextMenu {
-                        Button {
+                        Button(action: {
                             UIPasteboard.general.string = log
-                        } label: {
+                        }) {
                             Label("Copy Output", systemImage: "doc.on.doc")
                         }
+                        .modifier(SolariumButtonTint())
                     }
                 }
             }
         }
-        .modifier(TerminalPlatter())
+        .modifier(TerminalPlatter(isStandaloneView: true))
     }
 }
