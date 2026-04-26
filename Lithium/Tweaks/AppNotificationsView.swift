@@ -26,16 +26,20 @@ struct AppNotificationsView: View {
             List {
                 Section {
                     if appNotificationsArray.isEmpty {
-                        CompactAlert(label: "No Applications Added!", icon: "questionmark.app.dashed", text: "Click on the plus icon to add an app by bundle identifer. This will disable all notifications for the apps you choose.")
+                        PlainAlert(title: "No Applications Added!", icon: "questionmark.app.dashed", text: "Click on the plus icon to add an app by bundle identifer. This will disable all notifications for the apps you choose.")
+                            .foregroundStyle(Color.accentColor)
+                            .listRowBackground(Color.accentColor.opacity(0.2))
                     } else {
-                        CompactAlert(icon: "info.circle", text: "If enabled, the app will no longer be able to send any notifications, including critical and system alerts.")
+                        PlainAlert(icon: "info.circle", text: "If enabled, the app will no longer be able to send any notifications, including critical and system alerts.")
+                            .foregroundStyle(Color.accentColor)
+                            .listRowBackground(Color.accentColor.opacity(0.2))
                     }
                 }
                 if !appNotificationsArray.isEmpty {
                     Section(header: HeaderLabel(text: "Selected Applications", icon: "checklist")) {
                         ForEach(appNotificationsArray) { app in
                             // i hate swift SO MUCH. this sucks. i had to do this because binding the whole array would cause the app to crash if there was only one item left in the array and it was deleted.
-                            PlainToggle(label: app.label, isOn: Binding(
+                            PlainToggle(text: app.label, isOn: Binding(
                                 get: {
                                     // $0.id - the id of the item it's searching through
                                     // passing false if nothing is found is the main thing fixes the crash, as there's now some kind of value while it's transitioning into an empty array or something.
@@ -70,7 +74,7 @@ struct AppNotificationsView: View {
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
                     }
-                    .buttonStyle(TranslucentButtonStyle(color: .green))
+                    .buttonStyle(FancyButtonStyle(color: .green))
                 }
                 .modifier(OverlayBackground(stickBottomPadding: true))
             }
@@ -90,7 +94,7 @@ struct AppNotificationsView: View {
                     }) {
                         Image(systemName: "plus")
                     }
-                    .modifier(SolariumButtonTint())
+                    
                 }
                 if weOnADebugBuild {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -99,7 +103,7 @@ struct AppNotificationsView: View {
                         }) {
                             Image(systemName: "ant")
                         }
-                        .modifier(SolariumButtonTint())
+                        
                     }
                 }
             }

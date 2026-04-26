@@ -40,11 +40,11 @@ struct LogView: View {
                         }) {
                             Label("Copy Output", systemImage: "doc.on.doc")
                         }
-                        .modifier(SolariumButtonTint())
+                        
                     }
                 }
             }
         }
-        .modifier(TerminalPlatter(isStandaloneView: true))
+        .modifier(TerminalPlatter())
     }
 }

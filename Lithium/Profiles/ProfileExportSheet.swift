@@ -8,12 +8,19 @@
 import SwiftUI
 import PartyUI
 
+struct ExportableProfileItem: Hashable {
+    var id: String { label }
+    var label: String
+    var profileName: String
+}
+
 struct ProfileExportSheet: View {
     @Environment(\.dismiss) var dismiss
     @State private var profileArray: [ExportableProfileItem] = [
-        ExportableProfileItem(icon: "flag", label: "Restriction Toggles/Blocked Applications", profileName: ProfileName.applicationAccess),
-        ExportableProfileItem(icon: "character.cursor.ibeam", label: "Lockscreen Footnote", profileName: ProfileName.sharedDeviceConfiguration),
-        ExportableProfileItem(icon: "bell", label: "App Notifications", profileName: ProfileName.notificationSettings)
+        ExportableProfileItem(label: "Restriction Toggles/Blocked Applications", profileName: ProfileName.applicationAccess),
+        ExportableProfileItem(label: "Lockscreen Footnote", profileName: ProfileName.sharedDeviceConfiguration),
+        ExportableProfileItem(label: "App Notifications", profileName: ProfileName.notificationSettings),
+        ExportableProfileItem(label: "Webclips", profileName: ProfileName.webclip)
     ]
     
     var body: some View {
@@ -39,7 +46,7 @@ struct ProfileExportSheet: View {
                     }) {
                         Image(systemName: "xmark")
                     }
-                    .modifier(SolariumButtonTint())
+                    
                 }
             }
         }

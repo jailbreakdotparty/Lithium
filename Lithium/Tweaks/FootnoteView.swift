@@ -75,7 +75,7 @@ struct FootnoteView: View {
                         }) {
                             Image(systemName: "ant")
                         }
-                        .modifier(SolariumButtonTint())
+                        
                     }
                 }
             }
@@ -88,7 +88,7 @@ struct FootnoteView: View {
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
                     }
-                    .buttonStyle(TranslucentButtonStyle(color: .green))
+                    .buttonStyle(FancyButtonStyle(color: .green))
                 }
                 .modifier(OverlayBackground(stickBottomPadding: true))
             }

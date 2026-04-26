@@ -22,9 +22,13 @@ struct BlockedApplicationsView: View {
         NavigationStack {
             List {
                 if blockedApplicationsArray.isEmpty {
-                    CompactAlert(label: "No Applications Added!", icon: "questionmark.app.dashed", text: "Click on the plus icon to add an app by bundle identifer. This will hide the app from your device completely for the apps you choose.")
+                    PlainAlert(title: "No Applications Added!", icon: "questionmark.app.dashed", text: "Click on the plus icon to add an app by bundle identifer. This will hide the app from your device completely for the apps you choose.")
+                        .foregroundStyle(Color.accentColor)
+                        .listRowBackground(Color.accentColor.opacity(0.2))
                 } else {
-                    CompactAlert(icon: "info.circle", text: "If added, the app will not show up anywhere on the device.")
+                    PlainAlert(icon: "info.circle", text: "If added, the app will not show up anywhere on the device.")
+                        .foregroundStyle(Color.accentColor)
+                        .listRowBackground(Color.accentColor.opacity(0.2))
                 }
                 if !blockedApplicationsArray.isEmpty {
                     Section(header: HeaderLabel(text: "Selected Apps", icon: "checklist")) {
@@ -49,7 +53,7 @@ struct BlockedApplicationsView: View {
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
                     }
-                    .buttonStyle(TranslucentButtonStyle(color: .green))
+                    .buttonStyle(FancyButtonStyle(color: .green))
                 }
                 .modifier(OverlayBackground(stickBottomPadding: true))
             }
@@ -69,7 +73,7 @@ struct BlockedApplicationsView: View {
                     }) {
                         Image(systemName: "plus")
                     }
-                    .modifier(SolariumButtonTint())
+                    
                 }
                 if weOnADebugBuild {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -78,7 +82,7 @@ struct BlockedApplicationsView: View {
                         }) {
                             Image(systemName: "ant")
                         }
-                        .modifier(SolariumButtonTint())
+                        
                     }
                 }
             }

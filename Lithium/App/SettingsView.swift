@@ -44,17 +44,7 @@ struct SettingsView: View {
                     LinkCreditCell(image: Image("lunginspector"), name: "lunginspector", description: "Primary Developer", url: "https://github.com/lunginspector")
                 }
                 Section {
-                    NavigationLink("Acknowledgements", destination: AcknowledgementsView())
-                    NavigationLink("Customize", destination: CustomizeView(colorOptions: [
-                        ColorOption(label: "Default", color: Color.accent),
-                        ColorOption(label: "Blue", color: Color.blue),
-                        ColorOption(label: "Purple", color: Color.purple),
-                        ColorOption(label: "Pink", color: Color.pink),
-                        ColorOption(label: "Red", color: Color.red),
-                        ColorOption(label: "Orange", color: Color.orange),
-                        ColorOption(label: "Yellow", color: Color.yellow),
-                        ColorOption(label: "Green", color: Color.green)
-                    ]))
+                    NavigationLink("Licenses", destination: LicenseView())
                 }
             }
             .navigationTitle("Settings")
@@ -66,7 +56,7 @@ struct SettingsView: View {
                     }) {
                         Image(systemName: "xmark")
                     }
-                    .modifier(SolariumButtonTint())
+                    
                 }
             }
         }

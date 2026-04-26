@@ -51,7 +51,7 @@ struct RestrictionTogglesView: View {
         NavigationStack {
             List {
                 Section(header: HeaderLabel(text: "Device Updates", icon: "square.and.arrow.down")) {
-                    PlainToggle(icon: "clock", label: "Delay OTA Updates", infoType: .info, infoTitle: "Delay OTA Updates", infoMessage: "Note that this feature only supports delayed OTAs up to 90 days. Also, you cannot downgrade your device with this feature (e.g. delay from 26.3.1 → 26.2).", isOn: $enableDelayedOTA)
+                    PlainToggle(text: "Delay OTA Updates", icon: "clock", infoType: .info, infoTitle: "Delay OTA Updates", infoMessage: "Note that this feature only supports delayed OTAs up to 90 days. Also, you cannot downgrade your device with this feature (e.g. delay from 26.3.1 → 26.2).", isOn: $enableDelayedOTA)
                     if enableDelayedOTA {
                         HStack {
                             LabeledContent("Number of Days") {
@@ -69,7 +69,7 @@ struct RestrictionTogglesView: View {
                 ForEach($restrictionTogglesArray) { $section in
                     Section(header: HeaderLabel(text: section.label, icon: section.icon)) {
                         ForEach($section.tweakArray) { $item in
-                            PlainToggle(icon: item.icon, label: item.label, infoType: item.infoType, infoTitle: "Warning: Disable \(item.label)", infoMessage: item.alertMessage, isOn: $item.payloadValue)
+                            PlainToggle(text: item.label, icon: item.icon, infoType: item.infoType, infoTitle: "Warning: Disable \(item.label)", infoMessage: item.alertMessage, isOn: $item.payloadValue)
                         }
                     }
                 }
@@ -83,7 +83,7 @@ struct RestrictionTogglesView: View {
                         }) {
                             Image(systemName: "ant")
                         }
-                        .modifier(SolariumButtonTint())
+                        
                     }
                 }
             }
@@ -95,7 +95,7 @@ struct RestrictionTogglesView: View {
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
                     }
-                    .buttonStyle(TranslucentButtonStyle(color: .green))
+                    .buttonStyle(FancyButtonStyle(color: .green))
                 }
                 .modifier(OverlayBackground(stickBottomPadding: true))
             }

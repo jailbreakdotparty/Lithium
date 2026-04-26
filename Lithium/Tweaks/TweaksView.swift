@@ -13,8 +13,9 @@ struct TweaksView: View {
         NavigationStack {
             List {
                 Section {
-                    CompactAlert(icon: "info.circle", text: "Any of the tweaks grouped by payload will apply all at once.")
+                    PlainAlert(icon: "info.circle", text: "Any of the tweaks grouped by payload will apply all at once.")
                 }
+                .foregroundStyle(Color.accentColor)
                 .listRowBackground(Color.accentColor.opacity(0.2))
                 Section(header: HeaderLabel(text: "Restrictions", icon: "checklist")) {
                     NavigationLink("Restriction Toggles", destination: RestrictionTogglesView())

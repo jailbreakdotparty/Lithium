@@ -38,7 +38,7 @@ struct WebclipView: View {
                                         .resizable()
                                         .frame(width: 70, height: 70)
                                         .scaledToFit()
-                                        .clipShape(.rect(cornerRadius: DesignStyle.defaultComponentRadius))
+                                        .clipShape(.rect(cornerRadius: cornerRad.component))
                                 } else {
                                     EmptyIconPlaceholder()
                                 }
@@ -67,7 +67,7 @@ struct WebclipView: View {
                         }) {
                             Image(systemName: "ant")
                         }
-                        .modifier(SolariumButtonTint())
+                        
                     }
                 }
             }
@@ -80,7 +80,7 @@ struct WebclipView: View {
                     }) {
                         ButtonLabel(text: "Install Profile", icon: "party.popper")
                     }
-                    .buttonStyle(TranslucentButtonStyle(color: .green))
+                    .buttonStyle(FancyButtonStyle(color: .green))
                 }
                 .modifier(OverlayBackground(stickBottomPadding: true))
             }
@@ -157,10 +157,10 @@ struct EmptyIconPlaceholder: View {
             .frame(width: 70, height: 70)
             .background(.quaternary)
             .overlay {
-                RoundedRectangle(cornerRadius: DesignStyle.defaultComponentRadius)
+                RoundedRectangle(cornerRadius: cornerRad.component)
                     .strokeBorder(.secondary, style: StrokeStyle(lineWidth: 1, dash: [8]))
             }
-            .clipShape(.rect(cornerRadius: DesignStyle.defaultComponentRadius))
+            .clipShape(.rect(cornerRadius: cornerRad.component))
     }
 }
 

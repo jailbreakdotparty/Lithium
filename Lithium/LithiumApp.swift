@@ -14,8 +14,6 @@ var sema = DispatchSemaphore(value: 0)
 
 @main
 struct LithiumApp: App {
-    @StateObject private var theme = AppTheme()
-    
     init() {
         setvbuf(stdout, nil, _IONBF, 0)
         dup2(pipe.fileHandleForWriting.fileDescriptor, STDOUT_FILENO)
@@ -29,9 +27,6 @@ struct LithiumApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(theme)
-                .tint(theme.accentColor)
-                .preferredColorScheme(theme.appearance.appearances)
                 .onAppear {
                     if weOnADebugBuild {
                         print("[*] it's debugging time!!! Running \(AppInfo.appName) on version \(AppInfo.appVersion), build \(AppInfo.appBuild).")
@@ -41,6 +36,7 @@ struct LithiumApp: App {
     }
 }
 
+// allow arrays to be stored into AppStorage
 extension Array: @retroactive RawRepresentable where Element: Codable {
     public init?(rawValue: String) {
         guard let data = rawValue.data(using: .utf8),

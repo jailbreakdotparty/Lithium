@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1548A5A62F9D4777009C27D0 /* PartyUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1548A5A52F9D4777009C27D0 /* PartyUI */; };
 		1567CBDE2F5E4F45001A2055 /* PartyUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1567CBDD2F5E4F45001A2055 /* PartyUI */; };
+		15692C5A2F8B1884008B3479 /* LithiumAppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 15692C592F8B1884008B3479 /* LithiumAppIcon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		15692C592F8B1884008B3479 /* LithiumAppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = LithiumAppIcon.icon; sourceTree = "<group>"; };
 		15B92BD22F5C970C00B73862 /* Lithium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lithium.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -33,6 +36,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1567CBDE2F5E4F45001A2055 /* PartyUI in Frameworks */,
+				1548A5A62F9D4777009C27D0 /* PartyUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,6 +49,7 @@
 				152C308B2F6F1964003E395A /* ProfileTemplates */,
 				15B92BD42F5C970C00B73862 /* Lithium */,
 				15B92BD32F5C970C00B73862 /* Products */,
+				15692C592F8B1884008B3479 /* LithiumAppIcon.icon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +83,7 @@
 			name = Lithium;
 			packageProductDependencies = (
 				1567CBDD2F5E4F45001A2055 /* PartyUI */,
+				1548A5A52F9D4777009C27D0 /* PartyUI */,
 			);
 			productName = Lithium;
 			productReference = 15B92BD22F5C970C00B73862 /* Lithium.app */;
@@ -108,7 +114,7 @@
 			mainGroup = 15B92BC92F5C970C00B73862;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				1567CBDC2F5E4F45001A2055 /* XCLocalSwiftPackageReference "../../Packages/PartyUI" */,
+				1548A5A42F9D4777009C27D0 /* XCLocalSwiftPackageReference "../PartyUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 15B92BD32F5C970C00B73862 /* Products */;
@@ -125,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15692C5A2F8B1884008B3479 /* LithiumAppIcon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,10 +267,10 @@
 		15B92BDE2F5C970D00B73862 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = LithiumAppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = Release;
+				CURRENT_PROJECT_VERSION = "Beta 1";
 				DEVELOPMENT_TEAM = 3374H767F3;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -284,7 +291,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jbdotparty.Lithium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -305,10 +312,10 @@
 		15B92BDF2F5C970D00B73862 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = LithiumAppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = Release;
+				CURRENT_PROJECT_VERSION = "Beta 1";
 				DEVELOPMENT_TEAM = 3374H767F3;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -329,7 +336,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jbdotparty.Lithium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -371,13 +378,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		1567CBDC2F5E4F45001A2055 /* XCLocalSwiftPackageReference "../../Packages/PartyUI" */ = {
+		1548A5A42F9D4777009C27D0 /* XCLocalSwiftPackageReference "../PartyUI" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../Packages/PartyUI;
+			relativePath = ../PartyUI;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1548A5A52F9D4777009C27D0 /* PartyUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PartyUI;
+		};
 		1567CBDD2F5E4F45001A2055 /* PartyUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PartyUI;
