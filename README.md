@@ -8,6 +8,9 @@
   <p><a href="https://github.com/jailbreakdotparty/Lithium/releases/latest">Download</a> • <a href="https://jailbreak.party/discord">Discord</a> • <a href="https://jailbreak.party">Website</a></p>
 </div>
 
+> [!WARNING]
+> If you use Nugget, do not use this tool and install profiles, and then use Nugget without turning "Skip Setup" off! This will cause the configuration profiles to get stuck onto the device with NO way to remove them!
+
 ## What exactly does this do?
 This is basically an on-device profile generator that's centered around features and toggles inside of various [MDM-based payloads](https://developer.apple.com/documentation/devicemanagement) that would be good for legitmate customization.
 
