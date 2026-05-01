@@ -10,6 +10,8 @@ import PartyUI
 import PhotosUI
 
 struct WebclipView: View {
+    @AppStorage("enableDebug") var enableDebug: Bool = false
+    
     @State private var label: String = ""
     @State private var url: String = ""
     
@@ -60,7 +62,7 @@ struct WebclipView: View {
             }
             .navigationTitle("WebClip Generator")
             .toolbar {
-                if weOnADebugBuild {
+                if enableDebug {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
                             showDebugSheet.toggle()
@@ -109,6 +111,7 @@ struct WebclipView: View {
             updateWebclipPlist()
         }
     }
+    // MARK: Backend
     func getWebclipDataFromPlist() {
         let webclipDict = getPCDictFromProfile(profileName: ProfileName.webclip)
         
@@ -120,6 +123,7 @@ struct WebclipView: View {
         
         updateIconPreview()
     }
+    
     func updateWebclipPlist() {
         var webclipDict = getDictFromProfile(profileName: ProfileName.webclip)
         var payloadContentArray = webclipDict["PayloadContent"] as? [[String : Any]] ?? []
@@ -136,6 +140,7 @@ struct WebclipView: View {
         
         writeProfileData(profileName: ProfileName.webclip, profileDict: webclipDict)
     }
+    
     func updateIconPreview() {
         Task {
             do {

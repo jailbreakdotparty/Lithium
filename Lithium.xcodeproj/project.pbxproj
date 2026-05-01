@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		1548A5A62F9D4777009C27D0 /* PartyUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1548A5A52F9D4777009C27D0 /* PartyUI */; };
 		1567CBDE2F5E4F45001A2055 /* PartyUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1567CBDD2F5E4F45001A2055 /* PartyUI */; };
-		15692C5A2F8B1884008B3479 /* LithiumAppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 15692C592F8B1884008B3479 /* LithiumAppIcon.icon */; };
+		15692C5A2F8B1884008B3479 /* Lithium.icon in Resources */ = {isa = PBXBuildFile; fileRef = 15692C592F8B1884008B3479 /* Lithium.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15692C592F8B1884008B3479 /* LithiumAppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = LithiumAppIcon.icon; sourceTree = "<group>"; };
+		15692C592F8B1884008B3479 /* Lithium.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Lithium.icon; sourceTree = "<group>"; };
 		15B92BD22F5C970C00B73862 /* Lithium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lithium.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -49,7 +49,7 @@
 				152C308B2F6F1964003E395A /* ProfileTemplates */,
 				15B92BD42F5C970C00B73862 /* Lithium */,
 				15B92BD32F5C970C00B73862 /* Products */,
-				15692C592F8B1884008B3479 /* LithiumAppIcon.icon */,
+				15692C592F8B1884008B3479 /* Lithium.icon */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,7 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15692C5A2F8B1884008B3479 /* LithiumAppIcon.icon in Resources */,
+				15692C5A2F8B1884008B3479 /* Lithium.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,11 +267,11 @@
 		15B92BDE2F5C970D00B73862 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = LithiumAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Lithium;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "Beta 1";
-				DEVELOPMENT_TEAM = 3374H767F3;
+				CURRENT_PROJECT_VERSION = Release;
+				DEVELOPMENT_TEAM = HTH7RGGR9D;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -292,6 +292,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 0.1;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jbdotparty.Lithium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -302,6 +303,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -312,11 +314,11 @@
 		15B92BDF2F5C970D00B73862 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = LithiumAppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Lithium;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = "Beta 1";
-				DEVELOPMENT_TEAM = 3374H767F3;
+				CURRENT_PROJECT_VERSION = Release;
+				DEVELOPMENT_TEAM = HTH7RGGR9D;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -337,6 +339,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.2;
 				MARKETING_VERSION = 0.1;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jbdotparty.Lithium;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -347,6 +350,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

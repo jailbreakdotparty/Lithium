@@ -18,6 +18,8 @@ struct ItemRow: Identifiable, Equatable, Sendable {
 }
 
 struct AppNotificationsView: View {
+    @AppStorage("enableDebug") var enableDebug: Bool = false
+    
     @State private var appNotificationsArray: [BoolPayloadItem] = []
     @State private var showDebugSheet: Bool = false
     
@@ -94,9 +96,8 @@ struct AppNotificationsView: View {
                     }) {
                         Image(systemName: "plus")
                     }
-                    
                 }
-                if weOnADebugBuild {
+                if enableDebug {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
                             showDebugSheet = true
@@ -118,6 +119,7 @@ struct AppNotificationsView: View {
             updateAppNotificationsPlist()
         }
     }
+    // MARK: Backend
     /*
      internal plist structure
      

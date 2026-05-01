@@ -9,6 +9,8 @@ import SwiftUI
 import PartyUI
 
 struct RestrictionTogglesView: View {
+    @AppStorage("enableDebug") var enableDebug: Bool = false
+    
     // i'm sorry for having it right here but i also don't really care at the same time. lemin does it this way too so shut up.
     @State private var restrictionTogglesArray: [ItemRow] = [
         ItemRow(icon: "app", label: "Apps", tweakArray: [
@@ -76,7 +78,7 @@ struct RestrictionTogglesView: View {
             }
             .navigationTitle("Restriction Toggles")
             .toolbar {
-                if weOnADebugBuild {
+                if enableDebug {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
                             showDebugSheet.toggle()
@@ -119,6 +121,7 @@ struct RestrictionTogglesView: View {
             getRestrictionTogglesArrayFromPlist()
         }
     }
+    // MARK: Backend
     func getRestrictionTogglesArrayFromPlist() {
         let payloadContentDict = getPCDictFromProfile(profileName: ProfileName.applicationAccess)
         
@@ -134,6 +137,7 @@ struct RestrictionTogglesView: View {
         softwareUpdateDelayInt = payloadContentDict["enforcedSoftwareUpdateDelay"] as? Int ?? 0
         enableDelayedOTA = payloadContentDict["forceDelayedSoftwareUpdates"] as? Bool ?? false
     }
+    
     func updateRestrictionTogglesPlist() {
         let restrictionTogglesArrayFlat = restrictionTogglesArray.flatMap { $0.tweakArray }
         

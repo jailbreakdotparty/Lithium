@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "SolariumLight 1.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "SolariumLight.jpg",
+      "filename" : "solarium_light.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -23,7 +22,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "iOS-26-Wallpaper-Sky-Dark-2-768x1665.jpg",
+      "filename" : "solarium_dark.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },

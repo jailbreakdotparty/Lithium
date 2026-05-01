@@ -15,6 +15,8 @@ struct PayloadAppItem: Identifiable, Equatable {
 }
 
 struct BlockedApplicationsView: View {
+    @AppStorage("enableDebug") var enableDebug: Bool = false
+    
     @State private var blockedApplicationsArray: [PayloadAppItem] = []
     @State private var showDebugSheet: Bool = false
     
@@ -75,7 +77,7 @@ struct BlockedApplicationsView: View {
                     }
                     
                 }
-                if weOnADebugBuild {
+                if enableDebug {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
                             showDebugSheet = true
@@ -97,6 +99,7 @@ struct BlockedApplicationsView: View {
             updateBlockedApplicationsPlist()
         }
     }
+    // MARK: Backend
     func getBlockedApplicationsArrayFromPlist() {
         let payloadContentDict = getPCDictFromProfile(profileName: ProfileName.applicationAccess)
         let blockedAppBundleIDsArray = payloadContentDict["blockedAppBundleIDs"] as? [String] ?? []

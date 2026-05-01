@@ -14,22 +14,32 @@ var sema = DispatchSemaphore(value: 0)
 
 @main
 struct LithiumApp: App {
+    @AppStorage("enableDebug") var enableDebug: Bool = false
+    @AppStorage("isFirstLaunch") var isFirstLaunch: Bool = false
+    
     init() {
         setvbuf(stdout, nil, _IONBF, 0)
         dup2(pipe.fileHandleForWriting.fileDescriptor, STDOUT_FILENO)
         
         #if DEBUG
         weOnADebugBuild = true
+        if !isFirstLaunch {
+            enableDebug = true
+            isFirstLaunch = true
+        }
         #else
         weOnADebugBuild = false
         #endif
     }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .onAppear {
                     if weOnADebugBuild {
                         print("[*] it's debugging time!!! Running \(AppInfo.appName) on version \(AppInfo.appVersion), build \(AppInfo.appBuild).")
+                    } else {
+                        print("[*] Welcome to Lithium! Make sure that you supervise your device before usage. Running \(AppInfo.appName) on version \(AppInfo.appVersion), build \(AppInfo.appBuild).")
                     }
                 }
         }

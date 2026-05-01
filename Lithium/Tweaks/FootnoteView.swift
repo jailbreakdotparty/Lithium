@@ -9,6 +9,8 @@ import SwiftUI
 import PartyUI
 
 struct FootnoteView: View {
+    @AppStorage("enableDebug") var enableDebug: Bool = false
+    
     @State private var returnMessage: String = ""
     @State private var assetTag: String = ""
     @State private var showDebugSheet: Bool = false
@@ -68,7 +70,7 @@ struct FootnoteView: View {
             }
             .navigationTitle("Lockscreen Footnote")
             .toolbar {
-                if weOnADebugBuild {
+                if enableDebug {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button(action: {
                             showDebugSheet.toggle()
@@ -100,11 +102,13 @@ struct FootnoteView: View {
             getFootnoteDataFromPlist()
         }
     }
+    // MARK: Backend
     func getFootnoteDataFromPlist() {
         let footnoteDict = getPCDictFromProfile(profileName: ProfileName.sharedDeviceConfiguration)
         assetTag = footnoteDict["AssetTagInformation"] as? String ?? ""
         returnMessage = footnoteDict["IfLostReturnToMessage"] as? String ?? ""
     }
+    
     func updateFootnotePlist() {
         var footnoteDict = getDictFromProfile(profileName: ProfileName.sharedDeviceConfiguration)
         var payloadContentArray = footnoteDict["PayloadContent"] as? [[String : Any]] ?? []

@@ -12,10 +12,12 @@ struct HomeView: View {
     @State private var showProfileExportingSheet: Bool = false
     @State private var showSettingsView: Bool = false
     
+    @AppStorage("enableDebug") var enableDebug: Bool = false
+    
     var body: some View {
         NavigationStack {
             List {
-                Section(header: HeaderLabel(text: "Logs", icon: "terminal")) {
+                Section(header: HeaderLabel(text: "Logs", icon: "terminal"), footer: Text("Made by lunginspector for the [jailbreak.party](https://jailbreak.party) team.\nJoin the jailbreak.party [discord](https://jailbreak.party/discord)!")) {
                     LogView()
                 }
                 Section(header: HeaderLabel(text: "Version \(AppInfo.appVersion) (\(AppInfo.appBuild))", icon: "info.circle"), footer: Text("Please make sure that your device is supervised before usage. Otherwise, this tool **will not** function as expected. Made with love by lunginspector for [jailbreak.party](https://jailbreak.party).")) {
@@ -27,6 +29,9 @@ struct HomeView: View {
                         }
                         .buttonStyle(TranslucentButtonStyle())
                     }
+                }
+                Section(header: HeaderLabel(text: "Tweaks", icon: "gearshape")) {
+                    Toggle("Enable Debug Settings", isOn: $enableDebug)
                 }
             }
             .navigationTitle("Lithium")

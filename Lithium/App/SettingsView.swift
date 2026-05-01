@@ -43,9 +43,6 @@ struct SettingsView: View {
                 Section(header: HeaderLabel(text: "Credits", icon: "star")) {
                     LinkCreditCell(image: Image("lunginspector"), name: "lunginspector", description: "Primary Developer", url: "https://github.com/lunginspector")
                 }
-                Section {
-                    NavigationLink("Licenses", destination: LicenseView())
-                }
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
