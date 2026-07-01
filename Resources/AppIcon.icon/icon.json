@@ -2,7 +2,7 @@
   "fill" : {
     "linear-gradient" : [
       "display-p3:0.29020,0.91373,0.48627,1.00000",
-      "srgb:0.03137,0.59451,0.55543,1.00000"
+      "srgb:0.03137,0.54140,0.50000,1.00000"
     ],
     "orientation" : {
       "start" : {
@@ -19,8 +19,8 @@
     {
       "layers" : [
         {
-          "image-name" : "lithiumSymbol.svg",
-          "name" : "lithiumSymbol"
+          "image-name" : "icon.svg",
+          "name" : "icon"
         }
       ],
       "shadow" : {
