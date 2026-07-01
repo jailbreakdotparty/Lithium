@@ -7,15 +7,30 @@
 
 import SwiftUI
 
+enum TabItem {
+    case home, tweaks
+}
+
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+                .tag(TabItem.home)
+            
+            TweaksView()
+                .tabItem {
+                    Label("Tweaks", systemImage: "wrench.and.screwdriver")
+                }
+                .tag(TabItem.tweaks)
         }
-        .padding()
+        .onAppear {
+            if !fm.fileExists(atPath: AppURL.profiles.path) {
+                try? fm.createDirectory(at: AppURL.profiles, withIntermediateDirectories: false)
+            }
+        }
     }
 }
 

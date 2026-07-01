@@ -6,7 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		1573F62C2FF19B60006CA07D /* PartyUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1573F62B2FF19B60006CA07D /* PartyUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		1561ACF12FF4D00200CB66FF /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.2.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		1573F61C2FF19B47006CA07D /* Lithium.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lithium.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -16,6 +21,11 @@
 			path = Lithium;
 			sourceTree = "<group>";
 		};
+		1573F62E2FF19BA2006CA07D /* Resources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,16 +33,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1573F62C2FF19B60006CA07D /* PartyUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1561ACF02FF4D00200CB66FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1561ACF12FF4D00200CB66FF /* MobileCoreServices.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1573F6132FF19B47006CA07D = {
 			isa = PBXGroup;
 			children = (
+				1573F62E2FF19BA2006CA07D /* Resources */,
 				1573F61E2FF19B47006CA07D /* Lithium */,
+				1561ACF02FF4D00200CB66FF /* Frameworks */,
 				1573F61D2FF19B47006CA07D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,9 +83,11 @@
 			);
 			fileSystemSynchronizedGroups = (
 				1573F61E2FF19B47006CA07D /* Lithium */,
+				1573F62E2FF19BA2006CA07D /* Resources */,
 			);
 			name = Lithium;
 			packageProductDependencies = (
+				1573F62B2FF19B60006CA07D /* PartyUI */,
 			);
 			productName = Lithium;
 			productReference = 1573F61C2FF19B47006CA07D /* Lithium.app */;
@@ -94,6 +117,9 @@
 			);
 			mainGroup = 1573F6132FF19B47006CA07D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				1573F62A2FF19B5F006CA07D /* XCRemoteSwiftPackageReference "PartyUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1573F61D2FF19B47006CA07D /* Products */;
 			projectDirPath = "";
@@ -264,7 +290,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.7;
@@ -274,13 +300,15 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = Lithium/bridge.h;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 26.2;
 			};
 			name = Debug;
@@ -308,7 +336,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.7;
@@ -318,13 +346,15 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = Lithium/bridge.h;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 26.2;
 			};
 			name = Release;
@@ -351,6 +381,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1573F62A2FF19B5F006CA07D /* XCRemoteSwiftPackageReference "PartyUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jailbreakdotparty/PartyUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1573F62B2FF19B60006CA07D /* PartyUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1573F62A2FF19B5F006CA07D /* XCRemoteSwiftPackageReference "PartyUI" */;
+			productName = PartyUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1573F6142FF19B47006CA07D /* Project object */;
 }
