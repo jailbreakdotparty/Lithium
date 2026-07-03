@@ -23,8 +23,6 @@ struct WebclipView: View {
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var showFilesPicker = false
     
-    @State private var showDebug = false
-    
     var body: some View {
         List {
             Section {
@@ -107,9 +105,9 @@ struct WebclipView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
                     Button {
-                        showDebug.toggle()
+                        presentShareSheet(with: Profile.webclip.savedURL)
                     } label: {
-                        Label("Profile Viewer", systemImage: "doc.text")
+                        Label("Export Profile", systemImage: "square.and.arrow.up")
                     }
                     
                     Button(role: .destructive) {
@@ -126,9 +124,6 @@ struct WebclipView: View {
                     Image(systemName: "ellipsis")
                 }
             }
-        }
-        .sheet(isPresented: $showDebug) {
-            ProfileDebugSheet(item: Profile.webclip, isPresented: $showDebug)
         }
         .onChange(of: imageData) { newData in
             imageData = wcCropImage(data: newData)
@@ -234,7 +229,7 @@ struct WebclipView: View {
     }
 }
 
-// MARK: UI Components
+// MARK: ui
 struct AppIconModifier: ViewModifier {
     func body(content: Content) -> some View {
         if #available(iOS 19.0, *) {

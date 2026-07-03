@@ -120,7 +120,7 @@ struct FootnoteView: View {
             }
         }
         .sheet(isPresented: $showDebug) {
-            ProfileDebugSheet(item: Profile.footnote, isPresented: $showDebug)
+            ProfileViewSheet(item: Profile.footnote, isPresented: $showDebug)
         }
         .onAppear {
             ftCurrentDict = loadProfile(profile: Profile.footnote)

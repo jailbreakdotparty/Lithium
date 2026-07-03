@@ -1,5 +1,5 @@
 //
-//  ProfileDebugSheet.swift
+//  ProfileViewSheet.swift
 //  Lithium
 //
 //  Created by lunginspector on 6/28/26.
@@ -8,7 +8,7 @@
 import SwiftUI
 import PartyUI
 
-struct ProfileDebugSheet: View {
+struct ProfileViewSheet: View {
     var item: Profile
     @Binding var isPresented: Bool
     @State private var profileText: String = ""

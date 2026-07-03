@@ -91,7 +91,7 @@ struct AppBlockingView: View {
             }
         }
         .sheet(isPresented: $showDebug) {
-            ProfileDebugSheet(item: Profile.restrictions, isPresented: $showDebug)
+            ProfileViewSheet(item: Profile.restrictions, isPresented: $showDebug)
         }
     }
     

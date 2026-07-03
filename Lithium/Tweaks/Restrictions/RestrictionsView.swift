@@ -127,7 +127,7 @@ struct RestrictionsView: View {
             }
         }
         .sheet(isPresented: $showDebug) {
-            ProfileDebugSheet(item: Profile.restrictions, isPresented: $showDebug)
+            ProfileViewSheet(item: Profile.restrictions, isPresented: $showDebug)
         }
         .onAppear {
             rsCurrentDict = loadProfile(profile: Profile.restrictions)

@@ -103,7 +103,7 @@ struct NotificationsView: View {
             }
         }
         .sheet(isPresented: $showDebug) {
-            ProfileDebugSheet(item: Profile.notifications, isPresented: $showDebug)
+            ProfileViewSheet(item: Profile.notifications, isPresented: $showDebug)
         }
         .onAppear {
             nsLoadData()
