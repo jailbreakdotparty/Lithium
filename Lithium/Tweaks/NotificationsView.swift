@@ -72,12 +72,13 @@ struct NotificationsView: View {
         .navigationTitle("Notification Settings")
         .safeAreaInset(edge: .bottom) {
             Button {
+                Haptic.shared.play(.soft)
                 installProfile(profile: Profile.notifications)
             } label: {
                 ButtonLabel(text: "Install Profile", icon: "party.popper")
             }
             .buttonStyle(FancyButtonStyle())
-            .modifier(OverlayBackground(stickBottomPadding: true))
+            .modifier(OverlayBackground())
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

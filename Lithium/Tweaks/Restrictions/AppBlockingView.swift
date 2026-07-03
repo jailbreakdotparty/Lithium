@@ -18,6 +18,8 @@ struct AppBlockingView: View {
     @Binding var rsCurrentDict: NSMutableDictionary
     @AppStorage("BIDArray") private var BIDArray: [BIDItem] = []
     
+    @State private var showDebug = false
+    
     @State private var newName: String = ""
     @State private var newBID: String = ""
     
@@ -65,6 +67,32 @@ struct AppBlockingView: View {
             }
         }
         .navigationTitle("App Visibility")
+        .safeAreaInset(edge: .bottom) {
+            Button {
+                Haptic.shared.play(.soft)
+                installProfile(profile: Profile.restrictions)
+            } label: {
+                ButtonLabel(text: "Install Profile", icon: "party.popper")
+            }
+            .buttonStyle(FancyButtonStyle())
+            .modifier(OverlayBackground())
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Button {
+                        showDebug.toggle()
+                    } label: {
+                        Label("Profile Viewer", systemImage: "doc.text")
+                    }
+                } label: {
+                    Image(systemName: "ellipsis")
+                }
+            }
+        }
+        .sheet(isPresented: $showDebug) {
+            ProfileDebugSheet(item: Profile.restrictions, isPresented: $showDebug)
+        }
     }
     
     private func bidCreateKey(item: BIDItem) {
